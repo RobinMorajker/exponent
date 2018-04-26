@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>P3D Decentalized Exchange</title>
+	<meta name="keywords" content="powh3d, p3d, p3d token, p3d smart contract, ethereum smart contract, decentralized exchange, powh alternative, lending platform alternative, crypto currency, ethereum lending">
+	<meta name="description" content="P3Dx gives you access to the Decentralized Ethereum PoWH3D Smart Contract.">
+  	<!-- Favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<link rel="manifest" href="img/site.webmanifest">
+	<link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<meta name="msapplication-TileColor" content="#00aba9">
+	<meta name="msapplication-config" content="img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+	<link rel="stylesheet" href="css/alertify.css">
+	<script
+		src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous">
+	</script>
+	<style>
+		.app.testframe .buy,
+		.app.testframe .sell,
+		.app.testframe .transfer {
+			text-align: center;
+		}
+		.app.testframe .buy input,
+		.app.testframe .sell input,
+		.app.testframe .transfer input {
+			text-align: center;
+			font-size:25px;
+		}
+		.no-padding {
+			padding-top: 0 !important;
+			padding-bottom: 0 !important;
+		}
+		
+		.no-padding-lr {
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+		}
+		.approx {
+			font-size: 22px;
+		    font-style: italic;
+		    color: #949494;
+		}
+		.app.interface {
+			
+		}
+		.app.interface.loaded {
+			display: initial;
+		}
+		.app.stats.bubble span {
+			display: block;
+		}
+		.app.stats.bubble span.count {
+			margin-top: 12px;
+			font-size: 24px;
+			font-style: italic;
+			font-weight: bold;
+		}
+		.app.stats.bubble span.identifier {
+			font-size: 20px;
+			font-weight: bold;
+		}
+		.app.stats.bubble span.identifier .soft {
+			font-weight: 300;
+			font-size: 15px;
+		}
+		.app.stats.bubble span.converted {
+			margin-top: 10px;
+		}
+		.app.stats.textual {
+			text-align: center;
+		}
+		.app.stats.textual span {
+			display: block;
+			font-size: 18px;
+			margin-bottom: 15px;
+		}
+		.app.stats.textual span img {
+			background: #eadfdf;
+			padding: 5px;
+			margin: 0 auto;
+			width: 60px;
+			height: 60px;
+		}
+		.actions .button {
+			margin-bottom: 15px;
+			width: 100%;
+		}
+		.masternode.hidden{
+			display: none !important;
+		}
+		.masternode img {
+			width: 115px;
+		}
+		.masternode h2 {
+			font-weight: bold;
+			font-style: italic;
+		}
+		.masternode p {
+			padding-bottom: 15px;
+		}
+		.masternode .link span {
+			font-size: 22px;
+			display: block;
+			padding-bottom: 13px;
+		}
+		.masternode .link a {
+			font-size: 14px;
+		}
+		.buy .button,
+		.sell .button {
+			width: 100%;
+		}
+		.buy .six.wide.column,
+		.sell .six.wide.column {
+			text-align: center !important;
+		}
+		.buy .six.wide.column .buyPrice,
+		.buy .six.wide.column .sellPrice,
+		.sell .six.wide.column .buyPrice,
+		.sell .six.wide.column .sellPrice {
+			display: block;
+			font-size: 20px;
+			padding-bottom: 5px;
+		}
+		.transfer p {
+			text-align: center;
+		}
+		.transfer button {
+			width: 100%;
+		}
+		.transfer input {
+			height: 50px;
+			font-size: 20px !important;
+		}
+	</style>
+</head>
+<body>
+	<ui class="ui centered grid container intro" style="margin-top:10px;">
+		<div class="row">
+			<div class="column" style="text-align: center;">
+			<h2 class="ui header">
+			  <img src="img/p3dx.png" style="width: 176px; margin-bottom: .5em;">
+			  <div class="sub header">P3D Exchange for <a href="https://etherscan.io/address/0x6916B9EB04009550346857C9Fa7cf2B2792A91dd#code" target="_blank">PoWH3D Ethereum Decentralized Smart Contract</a></div>
+			  <div class="sub header">This P3Dx Exchange is <a href="https://github.com/p3dx/exchange" target="_blank">Open Source on Github</a></div>
+			  <div class="sub header" id="gettingstarted">If you have not setup Metamask Ethereum Wallet see <a href="gettingstarted.html">Getting Started</a></div>				
+			</h2>
+			</div>
+		</div>
+		
+	</ui>
+<!-- 	<div class="ui grid container app loader">
+		<div class="column">
+			<h1 class="ui header">
+				Loading...
+			</h1>
+		</div>
+	</div> -->
+	<div class="ui grid container app interface">
+		<div class="column">
+			<div class="ui raised segment">
+				<div class="ui grid app testframe">
+					<div class="row" style="padding-bottom: 0px;">
+						<div class="column masternode hidden" style="text-align: center;">
+							<h2>You are connected to PoWH3D Smart Contract</h2>
+							<img src="img/masternoderunning.gif" alt="">
+							<!--<p>You are currently holding 5 or more tokens, this means you're now running a Masternode! <br> You receive <strong>33% of the dividends</strong> made by anyone purchasing tokens with your masternode link.</p> -->
+							<p><span class="mnodeIfSince">If</span> you have more than 5 P3D tokens you receive <br><strong>33% of the 10% buy price premium</strong> when others use your link to buy!</p>
+							<div class="link">
+								<span>Your unique masternode link to share with others is:</span>
+								<a href="/?masternode=0x" style="word-wrap: break-word;">https://p3dx.github.io/exchange/?masternode=0x123456</a>
+							</div>
+							<div class="ui divider"></div>
+						</div>
+					</div>										
+					<div class="row" style="padding-top: 0px;">						
+						<div class="column" style="text-align: center;">
+							<h2 class="ui aligned icon header">
+							  <img src="img/holding-60.png" alt="">
+							  MY HOLDINGS
+							</h2>
+							<p>Your Balance increases as P3D Tokens are Bought, Sold and Transfered at a 10% Premium.  All P3D holders share this Premium based on the # of P3D Tokens held divided by the total circulating supply and shown as Rank below.
+							Click Buy using Balance to buy P3D Tokens using the ETH in the Smart Contract.  Click Withdraw Balance to transfer the ETH to your Ethereum Wallet.</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column no-padding-lr">
+							<div class="ui internally celled grid">
+								<div class="two column row">
+									<div class="column">
+								    		<div class="ui grid">
+											<div class="row no-padding">
+												<div class="column no-padding-lr" style="text-align: center;">
+													<h2 class="ui header">
+														SMART CONTRACT
+													</h2>
+												</div>
+											</div>
+											<div class="row">
+												<div class="column">
+													<div class="two column row">
+														<div class="column">
+								    							<div class="ui grid">
+																<div class="column app stats bubble no-padding-lr" id="myDividends">
+																	<center>
+																		<div class="ui circular segment">
+																			<span class="identifier">Balance <span class="soft">(ETH)</span></span>
+																			<span class="count">-</span>
+																			<span class="converted">(-USDT)</span>
+    																		</div>
+																	</center>
+																</div>
+															</div>
+                                                    								</div>
+														<div class="column">
+								    							<div class="ui grid">
+																<div class="row">
+																	<div class="column app stats bubble no-padding-lr" id="myTokens">
+																		<center>
+																			<div class="ui circular segment">								
+																				<span class="identifier">Tokens <span class="soft">(P3D)</span></span>
+																				<span class="count">-</span>
+																				<span class="converted">(-USDT)</span>
+                    																	</div>
+																		</center>
+																	</div>
+											    					</div>
+                                                    									</div>	
+                                                								</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="column" style="text-align: center;">
+													<p>Automatically refreshes every minute<span id="ethusd"></span></p>
+												</div>
+											</div>
+										</div>
+									</div>
+								    	<div class="column actions">
+								    		<div class="ui grid">
+											<div class="row no-padding">
+												<div class="column no-padding-lr" style="text-align: center;">
+													<h2 class="ui header">
+														ACTIONS
+													</h2>
+												</div>
+											</div>
+										    	<div class="row">
+										    		<div class="column">
+								    					<button id="reinvest" class="ui huge button">Buy using Balance</button>
+								    					<button id="withdraw" class="ui huge button">Withdraw Balance</button>
+								    					<a href="https://etherscan.io/address/0x6916B9EB04009550346857C9Fa7cf2B2792A91dd" target="_new"><button class="ui huge button">View Etherscan</button></a>
+													<a href="https://powh3d.eu/address/" target="_new"><button class="ui huge button">Graph My Progress</button></a>
+								    				</div>
+										    	</div>
+										</div>
+								    	</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column buy">
+							<div class="ui divider"></div>
+							<h2 class="ui aligned icon header">
+							  <img src="img/buy.png" alt="">
+							  BUY P3D TOKENS
+							</h2>
+							<p>Unit = Ethereum </p>
+							<p>Use more than 1 gwei gas price.</p>
+							<p>Referred by: <span Id="mnode">None</span></p>
+							
+							<div class="ui centered grid">
+								<div class="row">
+									<div class="six wide column">
+										P3D Buy Price: <span class="buyPrice">1234/token</span>
+									</div>
+								</div>
+								<div class="row">								
+									<div class="column" style="text-align: center;">
+										<form class="ui form">
+											<div class="field">
+												<input type="text" name="first-name" placeholder="0.05" style="width: 200px;">
+											</div>
+										</form>
+									</div>
+								</div>
+							
+								<div class="row no-padding">
+									<div class="column" style="text-align: center;">
+										<span class="approx">Type in amount of ETH to buy P3D tokens</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="column" style="text-align: center;">
+										<button class="ui right labeled massive icon button" style="width:200px;">
+											<i class="right arrow icon"></i>
+											Buy
+										</button>										
+									</div>
+								</div>
+								<p>Be sure to leave a few dollars worth of ETH in your MetaMask Wallet for Gas</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column sell">
+							<div class="ui divider"></div>
+							<h2 class="ui aligned icon header">
+							  <img src="img/sell.png" alt="">
+							  SELL P3D TOKENS
+							</h2>
+							<p>Unit = P3D Tokens.</p>
+							<p>Use more than 1 gwei gas price.</p>
+							<p>Click Withdraw Balance button after Selling for Eth.</p>
+							
+							<div class="ui centered grid">
+								<div class="row">
+									<div class="six wide column">
+										P3D Sell Price: <span class="sellPrice">1234/token</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="column" style="text-align: center;">
+										<form class="ui form">
+											<div class="field">
+												<input type="text" name="first-name" placeholder="25" style="width: 200px;">
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="row no-padding">
+									<div class="column" style="text-align: center;">
+										<span class="approx">Type in a number of P3D tokens to sell</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="column" style="text-align: center;">
+										<button class="ui right labeled massive icon button" style="width:200px;">
+											<i class="right arrow icon"></i>
+											Sell
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+				<div class="ui grid">
+					<div class="row">
+						<div class="column transfer">
+							<div class="ui divider"></div>
+							<h2 class="ui aligned icon header">
+							  <i class="circular inverted blue exchange alternate icon" style="display: inline-block; font-size: 1.2em;"></i>
+							  &nbsp;TRANSFER P3D
+							</h2>
+							<p>Unit = Tokens: Be aware that sending tokens immediately withdraws your Balance so they're not lost!</p>
+							
+							<div class="ui centered grid">
+								<div class="row">
+									<div class="column" style="text-align: center;">
+										<form class="ui form">
+											<div class="field">
+												<input type="text" id="transferAddress" placeholder="Address.." style="width: 260px;">
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="row">
+									<div class="column" style="text-align: center;">
+										<form class="ui form">
+											<div class="field">
+												<input type="text" id="transferTokenCount" placeholder="Tokens.." style="width: 260px;">
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="row no-padding">
+									<div class="column" style="text-align: center;">
+										<span class="approx">Type in a valid address and token amount..</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="column" style="text-align: center;">
+										<button class="ui right labeled massive icon button" style="width:260px;">
+											<i class="right arrow icon"></i>
+											Transfer
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+						<div class="column p3dstats">
+							<div class="ui divider"></div>
+							<div class="ui grid">
+								<div class="row">
+									<div class="column" style="text-align: center;">
+										<h2 class="ui header">
+											P3D STATS
+										</h2>
+									</div>
+								</div>
+                    						<div class="row">
+									<div class="column">
+										<div class="ui internally celled grid">
+											<div class="two column row">
+												<div class="column">
+								    					<div class="ui grid">
+														<div class="row">
+															<div class="column app stats textual">
+																<span class="eth">
+																	<img class="ui medium circular image" src="img/pTht7qE.png">
+																	<br><b id="ethInContract">- Ethereum</b> in contract
+																</span>
+                                                									</div>
+														</div>
+													</div>
+												</div>
+								    				<div class="column actions">
+								    					<div class="ui grid">											
+										    				<div class="row">
+										    					<div class="column app stats textual">
+																<span class="tokens">
+																	<img class="ui medium circular image" src="img/PowH_Logo_V2_Glow_Final_Concept_invert.png?width=522&amp;height=576">
+																	<br><b id="tokensInCirculation">- tokens</b> in circulation
+																</span>
+															</div>
+										    				</div>
+													</div>
+								    				</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="row">					
+					<div class="column">
+						<center><h3><a href="https://powhchart.com/#powh3d" target="_blank">P3D - Historical Chart (Sell Price)</a></h3></center>
+						<iframe id="priceChart" src="https://powhchart.com/graphs_v3.html?asset=powh3d&amp;version=11507&amp;yaxis_min=0" style="width: 100%; height: 630px; border: 0px; overflow: hidden;"></iframe>
+					</div>
+				</div>
+				<div class="ui active inverted dimmer" id="loadingSpinner">
+				     	<div class="ui massive text loader" id="loadingText">Connecting with metamask...<br>
+					 <noscript>You need to enable JavaScript to run this app.</noscript></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ui class="ui centered grid container">
+		<div class="row">
+			<div class="column" style="text-align: center; font-size: 10px;">
+			<p>Disclaimer: This P3Dx site is <a href="https://github.com/p3dx/exchange" target="_blank">open source</a> and comes with no guarantees.
+			   <br>P3D Exchange for <a href="https://etherscan.io/address/0x6916B9EB04009550346857C9Fa7cf2B2792A91dd#code" target="_blank">PoWH3D Ethereum Decentralized Smart Contract</a>
+ 			  <br>Since this is Decentralized another site to access P3D tokens is <span Id="powhSite"><a href="https://powh.io">Powh.io</a></span>
+			  <br>If you have not setup Metamask Ethereum Wallet yet click <a href="gettingstarted.html">Getting Started</a></p>
+			</div>
+		</div>		
+	</ui>
+	<script src="lib/ls.js"></script>
+	<script src="lib/alertify.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.1/bluebird.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.js"></script>
+	<script src="lib/web3.min.js"></script>
+  <script src="lib/buy2.js"></script>
+	
+</body>
+</html>
